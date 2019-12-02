@@ -1,9 +1,11 @@
 # pycococreator
 生成实例分割的coco的json标注文件  
+  
 文件应具有以下格式  
   
   图片的命名：<image_id>.jpg(jpeg, ...)  
   标注掩模的命名：<image_id>_<ann_id>_<supercategory>_<category>_<iscrowd>.png(...)  
+    
 使用  
     
   imgs_info(imgs_path, [date_captured, license_id, coco_url, flickr_url])  
