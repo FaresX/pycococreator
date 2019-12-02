@@ -9,4 +9,5 @@
   tococo(imgs_path, anns_path, [info, licenses, categories])  
   tococofile(imgs_path, anns_path, json_path, [info, licenses, categories])  
  如果需要个性化的定制可以在_pycococreatortools.py的更基本函数上进行  
-  
+安装
+  pip install git+git://github.com/Faresx/pycococreator.git
