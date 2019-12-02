@@ -101,12 +101,18 @@ def tococofile(imgs_path, anns_path, json_path,
         date_captured=datetime.datetime.utcnow().isoformat(' '),
         license_id=1, coco_url="", flickr_url="",
         img_size=None, tolerance=2, bbox=None,
-        info={"info":"info"}, licenses={"licenses":"licenses"}, categories=None):
+        info={"info":"info"}, licenses={"licenses":"licenses"}, categories=None,
+        rm=False):
     coco = tococo(imgs_path, anns_path, 
         date_captured=date_captured,
         license_id=license_id, coco_url=coco_url, flickr_url=flickr_url,
         img_size=img_size, tolerance=tolerance, bbox=bbox,
         info=info, licenses=licenses, categories=categories)
+    if os.path.isfile(json_path):
+        if rm:
+            os.remove(json_path)
+        else:
+            return
     with open(json_path, "w") as output:
         json.dump(coco, output)
 
