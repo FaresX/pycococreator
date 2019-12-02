@@ -3,7 +3,7 @@ from distutils.extension import Extension
 
 # To install library to Python site-packages run "python setup.py install"
 
-setup(name='pycococreatortools',
+setup(name='pycococreator',
     packages=['pycococreator'],
     package_dir = {'pycococreator': 'pycococreator'},
     version='0.1.0',
