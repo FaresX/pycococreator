@@ -7,6 +7,8 @@ import numpy as np
 import json
 import os
 import datetime
+import shutil
+import random
 
 def search_cates(anns_path):
     id = 0
@@ -95,5 +97,41 @@ def tococofile(imgs_path, anns_path, json_path,
     with open(json_path, "w") as output:
         json.dump(coco, output)
 
-    
-
+def cut2trte(imgs_path, anns_path, cut_path, cut_rate=0.7, rm=False):
+    if os.path.isdir(cut_path):
+        if rm:
+            shutil.rmtree(cut_path)
+        else:
+            print(" 文件夹已存在，若需重新生成，请设置 rm=true")
+            return
+    os.makedirs(cut_path+"/train/images")
+    os.makedirs(cut_path+"/train/annotations")
+    os.makedirs(cut_path+"/test/images")
+    os.makedirs(cut_path+"/test/annotations")
+    imgs_path_list = os.listdir(imgs_path)
+    anns_path_list = os.listdir(anns_path)
+    n = len(imgs_path_list)
+    ind = list(range(0, n))
+    random.shuffle(ind)
+    trn = int(round(cut_rate*n))
+    for i in range(0, trn):
+        imgi = imgs_path_list[ind[i]]
+        img_id = imgi.split(".")[0]
+        shutil.copyfile(anns_path+"/"+imgi, cut_path+"/train/images/"+imgi)
+        for j in anns_path_list:
+            if img_id == j.split("_")[0]:
+                try:
+                    shutil.copyfile(anns_path+"/"+j, cut_path+"/train/annotations"+j)
+                except:
+                    print("路径中可能存在未按规定格式命名的文件")
+        
+    for i in range(trn, n):
+        imgi = imgs_path_list[ind[i]]
+        img_id = imgi.split(".")[0]
+        shutil.copyfile(imgs_path+"/"+imgi, cut_path+"/test/images/"+imgi)
+        for j in anns_path_list:
+            if img_id == j.split("_")[0]:
+                try:
+                    shutil.copyfile(anns_path_list+"/"+j, cut_path+"/test/annotations/"+j)
+                except:
+                    print("路径中可能存在未按规定格式命名的文件")
