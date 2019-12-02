@@ -4,8 +4,8 @@ from distutils.extension import Extension
 # To install library to Python site-packages run "python setup.py install"
 
 setup(name='pycococreatortools',
-    packages=['pycococreatortools'],
-    package_dir = {'pycococreatortools': 'pycococreatortools'},
+    packages=['pycococreator'],
+    package_dir = {'pycococreator': 'pycococreator'},
     version='0.1.0',
     description = 'Tools to create COCO datasets',
     url = 'https://github.com/Faresx/pycococreator',
