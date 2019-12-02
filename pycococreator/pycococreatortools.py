@@ -80,6 +80,8 @@ def anns_info(anns_path, cate_dict=None, img_size=None, tolerance=2, bbox=None):
 
 def tococo(imgs_path, anns_path, 
         info={"info":"info"}, licenses={"licenses":"licenses"}, categories=None):
+    if not categories:
+        categories = search_cates(anns_path)
     coco = {
         "info" : info,
         "licenses" : licenses,
