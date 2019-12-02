@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # encoding=utf-8
 
-import _pycococreatortools as _pct
+from . import _pycococreatortools as _pct
 from PIL import Image
 import numpy as np
 import json
