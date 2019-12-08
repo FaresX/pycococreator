@@ -9,6 +9,7 @@ import os
 import datetime
 import shutil
 import random
+import tqdm
 
 def search_cates(anns_path):
     id = 0
@@ -43,7 +44,7 @@ def imgs_info(imgs_path, date_captured=datetime.datetime.utcnow().isoformat(' ')
         license_id=1, coco_url="", flickr_url=""):
 
     imgs_info = []
-    for i in os.listdir(imgs_path):
+    for i in tqdm.tqdm(os.listdir(imgs_path)):
         try:
             imgs_info.append(img_info(imgs_path+"/"+i, date_captured=date_captured,
                 license_id=license_id, coco_url=coco_url, flickr_url=flickr_url))
@@ -69,7 +70,7 @@ def anns_info(anns_path, categories=None, img_size=None, tolerance=2, bbox=None)
         categories = search_cates(anns_path)
     
     anns_info = []
-    for i in os.listdir(anns_path):
+    for i in tqdm.tqdm(os.listdir(anns_path)):
         try:
             anns_info.append(ann_info(anns_path+"/"+i, categories,
                 img_size=img_size, tolerance=tolerance, bbox=bbox))
@@ -134,7 +135,7 @@ def cut2trte(imgs_path, anns_path, cut_path, cut_rate=0.7, rm=False):
     random.shuffle(ind)
     trn = int(round(cut_rate*n))
     try:
-        for i in range(0, trn):
+        for i in tqdm.trange(0, trn):
             imgi = imgs_path_list[ind[i]]
             img_id = imgi.split(".")[0]
             shutil.copyfile(imgs_path+"/"+imgi, cut_path+"/train/images/"+imgi)
@@ -145,7 +146,7 @@ def cut2trte(imgs_path, anns_path, cut_path, cut_rate=0.7, rm=False):
         print("路径中可能存在未按规定格式命名的文件(train)")
             
     try:
-        for i in range(trn, n):
+        for i in tqdm.trange(trn, n):
             imgi = imgs_path_list[ind[i]]
             img_id = imgi.split(".")[0]
             shutil.copyfile(imgs_path+"/"+imgi, cut_path+"/test/images/"+imgi)
