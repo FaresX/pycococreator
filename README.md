@@ -4,7 +4,7 @@
 文件应具有以下格式  
   
   图片的命名：<image_id>.jpg(jpeg, ...)  
-  标注掩模的命名：<image_id>_<ann_id>_<supercategory>_<category>_<iscrowd>.png(...)  
+  标注掩模的命名：<image_id>\_\<ann_id>\_\<supercategory>\_\<category>\_\<iscrowd>.png(...)  
     
 使用  
     
